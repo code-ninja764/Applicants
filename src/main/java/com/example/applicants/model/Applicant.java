@@ -9,46 +9,46 @@ public class Applicant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String prefix;
-    @Column
-    private String firstName;
-    private String lastName;
-    private String phoneNumber;
-    private String addressLineOne;
-    private String addressLineTwo;
-    private String city;
-    private String zipCode;
-    private String vehicleType;
-    private String engineSize;
-    private String additionalDrivers;
-    private String commercialPurpose;
-    private String usedOutsideOfState;
-    private String currentValue;
-    private String regDate;
-    private String addComments;
-
-
-    public Applicant() {
-    }
-
-    public Applicant(Long id, String prefix, String firstName, String lastName, String phoneNumber, String addressLineOne, String addressLineTwo, String city, String zipCode, String vehicleType, String engineSize, String additionalDrivers, String commercialPurpose, String usedOutsideOfState, String currentValue, String regDate, String addComments) {
+    public Applicant(Long id, String prefix, String firstName, String lastName, String telephoneNumber, String addressLine1, String addressLine2, String city, String zipCode, String vehicleType, String engineSize, String additionalDrivers, String commercialPurposes, String usedOutsideState, String dateRegistered, String currentValue, String comments) {
         this.id = id;
         this.prefix = prefix;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.addressLineOne = addressLineOne;
-        this.addressLineTwo = addressLineTwo;
+        this.telephoneNumber = telephoneNumber;
+        this.addressLine1 = addressLine1;
+        this.addressLine2 = addressLine2;
         this.city = city;
         this.zipCode = zipCode;
         this.vehicleType = vehicleType;
         this.engineSize = engineSize;
         this.additionalDrivers = additionalDrivers;
-        this.commercialPurpose = commercialPurpose;
-        this.usedOutsideOfState = usedOutsideOfState;
+        this.commercialPurposes = commercialPurposes;
+        this.usedOutsideState = usedOutsideState;
+        this.dateRegistered = dateRegistered;
         this.currentValue = currentValue;
-        this.regDate = regDate;
-        this.addComments = addComments;
+        this.comments = comments;
+    }
+
+    private String prefix;
+    @Column
+    private String firstName;
+    private String lastName;
+    private String telephoneNumber;
+    private String addressLine1;
+    private String addressLine2;
+    private String city;
+    private String zipCode;
+    private String vehicleType;
+    private String engineSize;
+    private String additionalDrivers;
+    private String commercialPurposes;
+    private String usedOutsideState;
+    private String dateRegistered;
+    private String currentValue;
+    private String comments;
+
+
+    public Applicant() {
     }
 
     public Long getId() {
@@ -83,28 +83,28 @@ public class Applicant {
         this.lastName = lastName;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getTelephoneNumber() {
+        return telephoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setTelephoneNumber(String telephoneNumber) {
+        this.telephoneNumber = telephoneNumber;
     }
 
-    public String getAddressLineOne() {
-        return addressLineOne;
+    public String getAddressLine1() {
+        return addressLine1;
     }
 
-    public void setAddressLineOne(String addressLineOne) {
-        this.addressLineOne = addressLineOne;
+    public void setAddressLine1(String addressLine1) {
+        this.addressLine1 = addressLine1;
     }
 
-    public String getAddressLineTwo() {
-        return addressLineTwo;
+    public String getAddressLine2() {
+        return addressLine2;
     }
 
-    public void setAddressLineTwo(String addressLineTwo) {
-        this.addressLineTwo = addressLineTwo;
+    public void setAddressLine2(String addressLine2) {
+        this.addressLine2 = addressLine2;
     }
 
     public String getCity() {
@@ -147,20 +147,28 @@ public class Applicant {
         this.additionalDrivers = additionalDrivers;
     }
 
-    public String getCommercialPurpose() {
-        return commercialPurpose;
+    public String getCommercialPurposes() {
+        return commercialPurposes;
     }
 
-    public void setCommercialPurpose(String commercialPurpose) {
-        this.commercialPurpose = commercialPurpose;
+    public void setCommercialPurposes(String commercialPurposes) {
+        this.commercialPurposes = commercialPurposes;
     }
 
-    public String getUsedOutsideOfState() {
-        return usedOutsideOfState;
+    public String getUsedOutsideState() {
+        return usedOutsideState;
     }
 
-    public void setUsedOutsideOfState(String usedOutsideOfState) {
-        this.usedOutsideOfState = usedOutsideOfState;
+    public void setUsedOutsideState(String usedOutsideState) {
+        this.usedOutsideState = usedOutsideState;
+    }
+
+    public String getDateRegistered() {
+        return dateRegistered;
+    }
+
+    public void setDateRegistered(String dateRegistered) {
+        this.dateRegistered = dateRegistered;
     }
 
     public String getCurrentValue() {
@@ -171,19 +179,12 @@ public class Applicant {
         this.currentValue = currentValue;
     }
 
-    public String getRegDate() {
-        return regDate;
+    public String getComments() {
+        return comments;
     }
 
-    public void setRegDate(String regDate) {
-        this.regDate = regDate;
-    }
-
-    public String getAddComments() {
-        return addComments;
-    }
-
-    public void setAddComments(String addComments) {
-        this.addComments = addComments;
+    public void setComments(String comments) {
+        this.comments = comments;
     }
 }
+
