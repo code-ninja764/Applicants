@@ -2,7 +2,7 @@ package com.example.applicants.businessLogic;
 
 public class VehicleTypeFactor {
 
-    public double typeFactor(String vehicleType) {
+    public static double typeFactor(String vehicleType) {
 
         double vehicleTypeFactor = 0.0;
 
@@ -17,7 +17,8 @@ public class VehicleTypeFactor {
         } else if (vehicleType.equalsIgnoreCase("other")) {
             return vehicleTypeFactor = 1.7;
         } else {
-            return vehicleTypeFactor = 0.0;
+            //return vehicleTypeFactor = 0.0;
+            throw new IllegalArgumentException("Invalid Vehicle Type Exception");
         }
     }
 }

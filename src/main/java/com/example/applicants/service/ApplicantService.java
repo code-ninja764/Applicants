@@ -1,5 +1,6 @@
 package com.example.applicants.service;
 
+import com.example.applicants.businessLogic.BusinessLogic;
 import com.example.applicants.model.Applicant;
 import com.example.applicants.repository.ApplicantRepository;
 import org.springframework.stereotype.Service;
@@ -11,9 +12,11 @@ import java.util.Optional;
 public class ApplicantService {
 
     private final ApplicantRepository repository;
+    private final BusinessLogic businessLogic;
 
-    public ApplicantService(ApplicantRepository repository) {
+    public ApplicantService(ApplicantRepository repository, BusinessLogic businessLogic) {
         this.repository = repository;
+        this.businessLogic = businessLogic;
     }
 
     public List<Applicant> getAllApplicants() {
@@ -21,6 +24,8 @@ public class ApplicantService {
     }
 
     public Applicant save(Applicant applicant) {
+        businessLogic.calculateQuote(applicant);
+
         return repository.save(applicant);
     }//Save a New Record
 

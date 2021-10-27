@@ -7,11 +7,15 @@ public class VehicleValueFactor {
         double vehicleValueFactor = 0.0;
         int currentValueInt = Integer.parseInt(currentValue);
 
-        if (currentValueInt <= 5000){
-            return vehicleValueFactor = 1.0;
-        }
-        else {
-            return vehicleValueFactor = 1.2;
+        try {
+            if (currentValueInt > 0 && currentValueInt <= 5000) {
+                return vehicleValueFactor = 1.0;
+            } else {
+                return vehicleValueFactor = 1.2;
+            }
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("String cannot be converted to Int!");
+
         }
     }
 }

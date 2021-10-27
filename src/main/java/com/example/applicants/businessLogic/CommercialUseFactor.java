@@ -13,7 +13,7 @@ public class CommercialUseFactor {
             return commercialUseFactor = 1.0;
         }
         else {
-            return commercialUseFactor = 0.0;
+            throw new IllegalArgumentException("Invalid Entry");
         }
     }
 }
