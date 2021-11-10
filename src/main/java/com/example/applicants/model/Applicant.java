@@ -2,14 +2,14 @@ package com.example.applicants.model;
 
 import javax.persistence.*;
 
-@Entity
+@Entity (name = "DRIVER_DETAILS")
 public class Applicant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    public Applicant(Long id, String prefix, String firstName, String lastName, String telephoneNumber, String addressLine1, String addressLine2, String city, String zipCode, String vehicleType, String engineSize, String additionalDrivers, String commercialPurposes, String usedOutsideState, String dateRegistered, String currentValue, String comments) {
+    public Applicant(Long id, String prefix, String firstName, String lastName, String telephoneNumber, String addressLine1, String addressLine2, String city, String zipCode, String vehicleType, String engineSize, String additionalDrivers, String commercialPurposes, String usedOutsideState, String dateRegistered, String currentValue, String comments, double quoteAmount) {
         this.id = id;
         this.prefix = prefix;
         this.firstName = firstName;
@@ -27,6 +27,7 @@ public class Applicant {
         this.dateRegistered = dateRegistered;
         this.currentValue = currentValue;
         this.comments = comments;
+        this.quoteAmount = quoteAmount;
     }
 
     private String prefix;
@@ -46,6 +47,7 @@ public class Applicant {
     private String dateRegistered;
     private String currentValue;
     private String comments;
+    private double quoteAmount;
 
 
     public Applicant() {
@@ -185,6 +187,13 @@ public class Applicant {
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+    public double getQuoteAmount() {
+        return quoteAmount;
+    }
+
+    public void setQuoteAmount(double quoteAmount) {
+        this.quoteAmount = quoteAmount;
     }
 }
 

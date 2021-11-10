@@ -1,4 +1,4 @@
-package com.example.applicants.businessLogic;
+package com.example.applicants.service.businessLogic;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,8 +17,8 @@ class CommercialUseFactorTest {
     @BeforeEach
     void setUp() {
         //Setup test data
-        validYes = "Yes";
-        validNo = "No";
+        validYes = "true";
+        validNo = "false";
         invalid = "Invalid";
 
         commercialUseFactor = new CommercialUseFactor();

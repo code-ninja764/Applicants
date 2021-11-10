@@ -1,4 +1,4 @@
-package com.example.applicants.businessLogic;
+package com.example.applicants.service.businessLogic;
 
 public class VehicleTypeFactor {
 

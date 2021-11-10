@@ -1,4 +1,4 @@
-package com.example.applicants.businessLogic;
+package com.example.applicants.service.businessLogic;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -46,7 +46,7 @@ class VehicleValueFactorTest {
 
     @Test
     void valueFactorTestValidUpper() {
-        double expectedResult = 1.0;
+        double expectedResult = 1.2;
         double actualResult = vehicleValueFactor.valueFactor(validValueUpper);
 
         assertEquals(expectedResult, actualResult);
