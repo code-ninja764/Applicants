@@ -4,6 +4,7 @@ import './Update.css';
 import axios from 'axios';
 import { useHistory } from 'react-router';
 import { Button, Form } from 'semantic-ui-react'
+import SERVER_URL from "../../utils/constants";
 
 function Update() {
   const [firstName, setFirstName] = useState('');
@@ -29,7 +30,7 @@ function Update() {
     };
 
     //const endpointURL = `https://6151d1824a5f22001701d45d.mockapi.io/api/v1/carInsurance/${idForUpdate}`;
-    const endpointURL = `http://localhost:8080/applicants/?id=${idForUpdate}&telephoneNumber=${telephoneNumber}`;
+    const endpointURL = `${SERVER_URL}/applicants/?id=${idForUpdate}&telephoneNumber=${telephoneNumber}`;
     axios.put(endpointURL, telephoneUpdate)
       .then(() => history.push("/admin"))
       .catch(
@@ -41,7 +42,7 @@ function Update() {
   const callMockAPIToGetRecord= () => {
    
     //const endpointURL = `https://6151d1824a5f22001701d45d.mockapi.io/api/v1/carInsurance/${idForUpdate}`;
-    const endpointURL = `http://localhost:8080/applicants/id?id=${idForUpdate}`;
+    const endpointURL = `${SERVER_URL}/applicants/id?id=${idForUpdate}`;
     axios.get(endpointURL)
      .then(response => setTableData2(response.data));
   };

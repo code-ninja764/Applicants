@@ -3,6 +3,7 @@ import './Delete.css';
 import { Button, Table, Form } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import SERVER_URL from "../../utils/constants";
 
 
 function Delete() {
@@ -15,14 +16,14 @@ function Delete() {
       //LUKAS API: const endpointURL = "https://6151d17e4a5f22001701d459.mockapi.io/ap1/v1/people";
       // Ed's API Below
       //const endpointURL = "https://6151d1824a5f22001701d45d.mockapi.io/api/v1/carInsurance";
-      const endpointURL = `http://localhost:8080/applicants/id?id=${idForUpdate}`;
+      const endpointURL = `${SERVER_URL}/applicants/id?id=${idForUpdate}`;
       axios.get(endpointURL)
         .then(response => setTableData(response.data));
     };
 
     const onDelete = (id) => {
       //const endpointURL = `https://6151d1824a5f22001701d45d.mockapi.io/api/v1/carInsurance/${id}`;
-      const endpointURL = `http://localhost:8080/applicants?id=${id}`;
+      const endpointURL = `${SERVER_URL}/applicants?id=${id}`;
       axios.delete(endpointURL)
         .then(() => callMockApiWithAxiosGET())
         .then (() => window.location.reload())
@@ -36,7 +37,7 @@ function Delete() {
    
     //const endpointURL = `https://6151d1824a5f22001701d45d.mockapi.io/api/v1/carInsurance/${idForUpdate}`;
     //const endpointURL = `https://6151d1824a5f22001701d45d.mockapi.io/api/v1/carInsurance/${idForUpdate}`;
-    const endpointURL = `http://localhost:8080/applicants/id?id=${idForUpdate}`;
+    const endpointURL = `${SERVER_URL}/applicants/id?id=${idForUpdate}`;
     axios.get(endpointURL)
       .then(response => setTableData2(response.data))
       .catch(

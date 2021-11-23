@@ -4,6 +4,7 @@ import { Button, Table } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Form } from 'semantic-ui-react';
+import SERVER_URL from "../../utils/constants";
 
 function Read() {
   const [tableData, setTableData] = useState([]);
@@ -17,15 +18,17 @@ function Read() {
     //LUKAS API: const endpointURL = "https://6151d17e4a5f22001701d459.mockapi.io/ap1/v1/people";
     // Ed's API Below
     //const endpointURL = "https://6151d1824a5f22001701d45d.mockapi.io/api/v1/carInsurance";
-    const endpointURL = "http://localhost:8080/applicants"
+    const endpointURL = SERVER_URL + "/applicants"
     axios.get(endpointURL)
       .then(response => setTableData(response.data));
   };
 
   //for retrieving id 
   const callMockAPIToGetRecord= () => {
-   
-    const endpointURL = `https://6151d1824a5f22001701d45d.mockapi.io/api/v1/carInsurance/${idForUpdate}`;
+
+    //Mock api
+    //const endpointURL = `https://6151d1824a5f22001701d45d.mockapi.io/api/v1/carInsurance/${idForUpdate}`;
+    const endpointURL = `${SERVER_URL}/applicants/id?id=${idForUpdate}`;
     axios.get(endpointURL)
       .then(response => setTableData2(response.data));
   };

@@ -3,6 +3,7 @@ import { Button, Form, Checkbox, Grid, TextArea } from 'semantic-ui-react';
 import axios from 'axios';
 import './Create.css';
 import { useHistory } from 'react-router';
+import SERVER_URL from "../../utils/constants";
 
 function Create() {
   const [firstName, setFirstName] = useState('');
@@ -47,7 +48,7 @@ function Create() {
 
     //lukas - const endpointURL = "https://6151d17e4a5f22001701d459.mockapi.io/ap1/v1/people";
     //const endpointURL = "https://6151d1824a5f22001701d45d.mockapi.io/api/v1/carInsurance";
-    const endpointURL = "http://localhost:8080/applicants";
+    const endpointURL = SERVER_URL + "/applicants";
     axios.post(endpointURL, formData)
       .then(() => history.push("/"))
       .catch(err => console.log(err));
