@@ -53,7 +53,7 @@ function Get() {
       <Form>
       <Form.Field>
         <label>ID</label>
-        <input 
+        <input
           name="idForUpdate"
           onChange={e => setidForUpdate(e.target.value)}
           placeholder='ID'
@@ -124,6 +124,22 @@ function Get() {
           }
         </Table.Body>
         </Table>
+
+      <Table celled>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>Quote Amount</Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+
+        <Table.Body>
+          {
+            <Table.Row>
+              <Table.Cell><b>${tableData2.quoteAmount}</b></Table.Cell>
+            </Table.Row>
+          }
+        </Table.Body>
+      </Table>
 
         <Link to="/admin">
            <Button color="green"
