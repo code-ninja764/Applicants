@@ -8,11 +8,25 @@ import Get from  './components/Get/Get';
 import { BrowserRouter, Route } from 'react-router-dom';
 import AdminPanel from './components/AdminPanel/AdminPanel';
 import logo from './images/AllstateLogo.png';
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer} from "react-toastify";
 
 
 function App() {
   return (
     <BrowserRouter>
+      <ToastContainer
+          position="top-center"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+      />
+
     <div class="ui top fixed menu header">
         <a class="item" href='/'>
           <img alt='Allstate Logo' src={logo} />

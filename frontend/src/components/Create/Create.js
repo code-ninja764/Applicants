@@ -4,6 +4,7 @@ import axios from 'axios';
 import './Create.css';
 import { useHistory } from 'react-router';
 import SERVER_URL from "../../utils/constants";
+import { toast } from "react-toastify";
 
 function Create() {
   const [firstName, setFirstName] = useState('');
@@ -50,8 +51,29 @@ function Create() {
     //const endpointURL = "https://6151d1824a5f22001701d45d.mockapi.io/api/v1/carInsurance";
     const endpointURL = SERVER_URL + "/applicants";
     axios.post(endpointURL, formData)
-      .then(() => history.push("/"))
-      .catch(err => console.log(err));
+      //.then(() => history.push("/")
+      //.catch(err => console.log(err));
+        .then((response) => {
+    let id = response.data.id;
+    if (response.status >= 200 && response.status < 300) {
+      toast.success("Thank you, your quote has been submitted.", {
+        onClose: () => history.push(`/applicants/${id}`),
+      })
+    }
+    })
+.catch(function (error) {
+  if (error.response) {
+    console.log(error.response.data);
+    console.log(error.response.status);
+    console.log(error.response.headers);
+  } else if (error.request) {
+    console.log(error.request);
+  } else {
+    console.log("Error", error.message);
+  }
+  toast.error("Something went wrong!")
+  console.log(error.config);
+});
   }
 
   const options = [
@@ -188,8 +210,8 @@ function Create() {
 
               <Form.Field>
                 <label>Date vehicle was first registered</label>
-                <div class="col-8">
-                  <input id="dateRegistered" name="dateRegistered" type="date" required="required" class="form-control" onChange={e => setDateRegistered(e.target.value)} />
+                <div className="col-8">
+                  <input id="dateRegistered" name="dateRegistered" type="date" required="required" className="form-control" onChange={e => setDateRegistered(e.target.value)} />
                 </div>
               </Form.Field>
             </Grid.Column>
