@@ -1,172 +1,170 @@
 import './Get.css';
 
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 
-import { Button, Table } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import {Button, Table} from 'semantic-ui-react';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
-import { Form } from 'semantic-ui-react';
+import {Form} from 'semantic-ui-react';
 import SERVER_URL from "../../utils/constants";
 
+
 function Get() {
-  const [tableData, setTableData] = useState([]);
-  const [idForUpdate, setidForUpdate] = useState([]);
-  const [tableData2, setTableData2] = useState([]);
-  const [errorNoRecord, setErrorNoRecord] = useState(false);
+    const [tableData, setTableData] = useState([]);
+    const [idForUpdate, setidForUpdate] = useState([]);
+    const [tableData2, setTableData2] = useState([]);
+    const [errorNoRecord, setErrorNoRecord] = useState(false);
 
 
+    const callMockApiWithAxiosGET = () => {
+        //LUKAS API: const endpointURL = "https://6151d17e4a5f22001701d459.mockapi.io/ap1/v1/people";
+        // Ed's API Below
+        //const endpointURL = "https://6151d1824a5f22001701d45d.mockapi.io/api/v1/carInsurance";
+        const endpointURL = SERVER_URL + "/applicants"
+        axios.get(endpointURL)
+            .then(response => setTableData(response.data));
+    };
 
-  const callMockApiWithAxiosGET = () => {
-    //LUKAS API: const endpointURL = "https://6151d17e4a5f22001701d459.mockapi.io/ap1/v1/people";
-    // Ed's API Below
-    //const endpointURL = "https://6151d1824a5f22001701d45d.mockapi.io/api/v1/carInsurance";
-    const endpointURL = SERVER_URL + "/applicants"
-    axios.get(endpointURL)
-      .then(response => setTableData(response.data));
-  };
+    //for retrieving id
+    const callMockAPIToGetRecord = () => {
 
-  //for retrieving id 
-  const callMockAPIToGetRecord= () => {
-   
-    //const endpointURL = `https://6151d1824a5f22001701d45d.mockapi.io/api/v1/carInsurance/${idForUpdate}`;
-    const endpointURL = `${SERVER_URL}/applicants/id?id=${idForUpdate}`;
-    axios.get(endpointURL)
-      .then(response => handleResponseGet(response.data));
-  };
+        //const endpointURL = `https://6151d1824a5f22001701d45d.mockapi.io/api/v1/carInsurance/${idForUpdate}`;
+        const endpointURL = `${SERVER_URL}/applicants/id?id=${idForUpdate}`;
+        axios.get(endpointURL)
+            .then(response => handleResponseGet(response.data));
+    };
 
-  console.log(idForUpdate);
+    console.log(idForUpdate);
 
-  const handleResponseGet = (data) =>{
-    if(data && !Array.isArray(data))
-    {
-      setTableData2(data);
-      setErrorNoRecord(false);
+    const handleResponseGet = (data) => {
+        if (data && !Array.isArray(data)) {
+            setTableData2(data);
+            setErrorNoRecord(false);
+        } else {
+            document.getElementById("idForUpdate").value = '';
+            setErrorNoRecord(true);
+        }
     }
-    else
-    {
-      document.getElementById("idForUpdate").value = '';
-      setErrorNoRecord(true);
+
+
+    function setLocalStorage(data) {
+        console.log(data.id);
+        localStorage.setItem("id", data.id);
+        localStorage.setItem("firstName", data.firstName);
+        localStorage.setItem("lastName", data.lastName);
+        localStorage.setItem("telephoneNumber", data.telephoneNumber);
     }
-  }
+
+    useEffect(() => {
+        callMockApiWithAxiosGET();
+    }, []);
+
+    let quoteNum;
+    return (
+        <div>
+            <Form>
+                <Form.Field>
+                    <label>ID</label>
+                    <input
+                        name="idForUpdate"
+                        id="idForUpdate"
+                        onChange={e => setidForUpdate(e.target.value)}
+                        placeholder='ID'
+                        value={idForUpdate}/>
+                </Form.Field>
+                <Form.Button positive
+                             type='submit'
+                             onClick={callMockAPIToGetRecord}
+                >Fetch</Form.Button>
+            </Form>
+
+            {errorNoRecord && <p className='errors'>No record found with Driver ID {idForUpdate}</p>}
+
+            <Table celled>
+                <Table.Header>
+                    <Table.Row>
+                        <Table.HeaderCell>Prefix</Table.HeaderCell>
+                        <Table.HeaderCell>First Name</Table.HeaderCell>
+                        <Table.HeaderCell>Last Name</Table.HeaderCell>
+                        <Table.HeaderCell>Telephone Number</Table.HeaderCell>
+                        <Table.HeaderCell>Address Line One</Table.HeaderCell>
+                        <Table.HeaderCell>Address Line Two</Table.HeaderCell>
+                        <Table.HeaderCell>City</Table.HeaderCell>
+                        <Table.HeaderCell>Zip Code</Table.HeaderCell>
+                    </Table.Row>
+                </Table.Header>
+
+                <Table.Body>
+                    {
+                        <Table.Row>
+                            <Table.Cell>{tableData2.prefix}</Table.Cell>
+                            <Table.Cell>{tableData2.firstName}</Table.Cell>
+                            <Table.Cell>{tableData2.lastName}</Table.Cell>
+                            <Table.Cell>{tableData2.telephoneNumber}</Table.Cell>
+                            <Table.Cell>{tableData2.addressLine1}</Table.Cell>
+                            <Table.Cell>{tableData2.addressLine2}</Table.Cell>
+                            <Table.Cell>{tableData2.city}</Table.Cell>
+                            <Table.Cell>{tableData2.zipCode}</Table.Cell>
+                        </Table.Row>
+                    }
+                </Table.Body>
+            </Table>
+
+            <Table celled>
+                <Table.Header>
+                    <Table.Row>
+                        <Table.HeaderCell>Vehicle body style</Table.HeaderCell>
+                        <Table.HeaderCell>Engine capacity</Table.HeaderCell>
+                        <Table.HeaderCell>Additional drivers</Table.HeaderCell>
+                        <Table.HeaderCell>Current value</Table.HeaderCell>
+                        <Table.HeaderCell>Commercial purposes?</Table.HeaderCell>
+                        <Table.HeaderCell>Outside state?</Table.HeaderCell>
+                        <Table.HeaderCell>Date registered</Table.HeaderCell>
+                        <Table.HeaderCell>Comments</Table.HeaderCell>
+                    </Table.Row>
+                </Table.Header>
+
+                <Table.Body>
+                    {
+                        <Table.Row>
+                            <Table.Cell>{tableData2.vehicleType}</Table.Cell>
+                            <Table.Cell>{tableData2.engineSize}</Table.Cell>
+                            <Table.Cell>{tableData2.additionalDrivers}</Table.Cell>
+                            <Table.Cell>{tableData2.currentValue}</Table.Cell>
+                            <Table.Cell>{tableData2.commercialPurposes}</Table.Cell>
+                            <Table.Cell>{tableData2.usedOutsideState}</Table.Cell>
+                            <Table.Cell>{tableData2.dateRegistered}</Table.Cell>
+                            <Table.Cell>{tableData2.comments}</Table.Cell>
+                        </Table.Row>
+                    }
+                </Table.Body>
+            </Table>
+
+            <Table celled>
+                <Table.Header>
+                    <Table.Row>
+                        <Table.HeaderCell>Quote Amount</Table.HeaderCell>
+                    </Table.Row>
+                </Table.Header>
+
+                <Table.Body>
+                    {
+                        <Table.Row>
+                            <Table.Cell><b>${Math.round((tableData2.quoteAmount + Number.EPSILON) * 100) / 100}</b></Table.Cell>
+                            {/*<Table.Cell><b>${(tableData2.quoteAmount)}</b></Table.Cell>*/}
+                        </Table.Row>
+                    }
+                </Table.Body>
+            </Table>
+
+            <Link to="/admin">
+                <Button color="green"
+                >Back to admin panel</Button>
+            </Link>
+        </div>
 
 
-
-  function setLocalStorage(data) {
-    console.log(data.id);
-    localStorage.setItem("id", data.id);
-    localStorage.setItem("firstName", data.firstName);
-    localStorage.setItem("lastName", data.lastName);
-    localStorage.setItem("telephoneNumber", data.telephoneNumber);
-  }
-
-  useEffect(() => {
-    callMockApiWithAxiosGET();
-  }, []);
-
-  return (
-    <div>
-      <Form>
-      <Form.Field>
-        <label>ID</label>
-        <input
-          name="idForUpdate"
-          id = "idForUpdate"
-          onChange={e => setidForUpdate(e.target.value)}
-          placeholder='ID'
-          value={idForUpdate} />
-      </Form.Field>
-      <Form.Button positive
-          type='submit'
-          onClick={callMockAPIToGetRecord}
-        >Fetch</Form.Button>
-      </Form>
-
-      {errorNoRecord && <p className='errors'>No record found with Driver ID {idForUpdate}</p>}
-
-      <Table celled>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell>Prefix</Table.HeaderCell>
-            <Table.HeaderCell>First Name</Table.HeaderCell>
-            <Table.HeaderCell>Last Name</Table.HeaderCell>
-            <Table.HeaderCell>Telephone Number</Table.HeaderCell>
-            <Table.HeaderCell>Address Line One</Table.HeaderCell>
-            <Table.HeaderCell>Address Line Two</Table.HeaderCell>
-            <Table.HeaderCell>City</Table.HeaderCell>
-            <Table.HeaderCell>Zip Code</Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-
-        <Table.Body>
-          {
-                <Table.Row>
-                  <Table.Cell>{tableData2.prefix}</Table.Cell>
-                  <Table.Cell>{tableData2.firstName}</Table.Cell>
-                  <Table.Cell>{tableData2.lastName}</Table.Cell>
-                  <Table.Cell>{tableData2.telephoneNumber}</Table.Cell>
-                  <Table.Cell>{tableData2.addressLine1}</Table.Cell>
-                  <Table.Cell>{tableData2.addressLine2}</Table.Cell>
-                  <Table.Cell>{tableData2.city}</Table.Cell>
-                  <Table.Cell>{tableData2.zipCode}</Table.Cell>
-                </Table.Row>
-          }
-        </Table.Body>
-        </Table>
-
-        <Table celled>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell>Vehicle body style</Table.HeaderCell>
-            <Table.HeaderCell>Engine capacity</Table.HeaderCell>
-            <Table.HeaderCell>Additional drivers</Table.HeaderCell>
-            <Table.HeaderCell>Curent value</Table.HeaderCell>
-            <Table.HeaderCell>Commercial purposes?</Table.HeaderCell>
-            <Table.HeaderCell>Outside state?</Table.HeaderCell>
-            <Table.HeaderCell>Date registered</Table.HeaderCell>
-            <Table.HeaderCell>Comments</Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-
-        <Table.Body>
-          {
-                <Table.Row>
-                  <Table.Cell>{tableData2.vehicleType}</Table.Cell>
-                  <Table.Cell>{tableData2.engineSize}</Table.Cell>
-                  <Table.Cell>{tableData2.additionalDrivers}</Table.Cell>
-                  <Table.Cell>{tableData2.currentValue}</Table.Cell>
-                  <Table.Cell>{tableData2.commercialPurposes}</Table.Cell>
-                  <Table.Cell>{tableData2.usedOutsideState}</Table.Cell>
-                  <Table.Cell>{tableData2.dateRegistered}</Table.Cell>
-                  <Table.Cell>{tableData2.comments}</Table.Cell>
-                </Table.Row>
-          }
-        </Table.Body>
-        </Table>
-
-      <Table celled>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell>Quote Amount</Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-
-        <Table.Body>
-          {
-            <Table.Row>
-              <Table.Cell><b>${tableData2.quoteAmount}</b></Table.Cell>
-            </Table.Row>
-          }
-        </Table.Body>
-      </Table>
-
-        <Link to="/admin">
-           <Button color="green"
-           >Back to admin panel</Button>
-         </Link>
-    </div>
-
-
-  );
+    );
 }
 
 

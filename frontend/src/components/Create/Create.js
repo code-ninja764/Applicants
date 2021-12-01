@@ -57,7 +57,7 @@ function Create() {
     let id = response.data.id;
     if (response.status >= 200 && response.status < 300) {
       toast.success("Thank you, your quote has been submitted.", {
-        onClose: () => history.push(`/applicants/${id}`),
+        onClose: () => history.push(`/`),
       })
     }
     })
@@ -136,35 +136,40 @@ function Create() {
           <Form.Select
             fluid
             label='Prefix'
+            required="required"
             options={options}
             placeholder='Prefix'
             onChange={e => setPrefix(e.target.textContent)}
             width={2} />
 
-          <Form.Input fluid label='First name' placeholder='First name'
+          <Form.Input fluid label='First name' placeholder='First name' required="required"
             onChange={e => setFirstName(e.target.value)}
             width={5} />
-          <Form.Input fluid label='Last name' placeholder='Last name'
+          <Form.Input fluid label='Last name' placeholder='Last name' required="required"
             onChange={e => setLastName(e.target.value)}
             width={5} />
-          <Form.Input fluid label='Telephone Number' placeholder='Telephone Number'
+          <Form.Input fluid label='Telephone Number' placeholder='Telephone Number' required="required"
             onBlur={e => validatePhoneNumber(e.target.value)}
             width={4} />
         </Form.Group>
         </div>
 
         <div>
-        <Form.Field> <label>Address Line 1</label> 
-        <input placeholder='Address Line 1' 
+        <Form.Field> <label>Address Line 1<sup>*</sup></label>
+        <input placeholder='Address Line 1'
+               required="required"
         onChange={e=>setAddressLine1(e.target.value)}/> </Form.Field>
           <Form.Field> <label>Address Line 2</label> 
-          <input placeholder='Address Line 2' 
+          <input placeholder='Address Line 2'
+                 required="required"
           onChange={e=>setAddressLine2(e.target.value)}/> </Form.Field>
           <Form.Field> <label>City</label> 
-          <input placeholder='City' 
+          <input placeholder='City'
+                 required="required"
           onChange={e=>setCity(e.target.value)}/> </Form.Field>
-          <Form.Field> <label>Zip Code</label> 
-          <input placeholder='Zip Code' 
+          <Form.Field> <label>Zip Code</label>
+          <input placeholder='Zip Code'
+                 required="required"
           onChange={e=>setZipCode(e.target.value)}/> </Form.Field>
         </div>
 
@@ -177,6 +182,7 @@ function Create() {
               <Form.Select
                 fluid
                 id='vehicleType'
+                required="required"
                 label='Vehicle Type'
                 options={vehicleOptions}
                 placeholder='Vehicle Type'
@@ -186,6 +192,7 @@ function Create() {
               <Form.Select
                 fluid
                 id='engineSize'
+                required="required"
                 label='Engine Size'
                 options={engineSizeOptions}
                 placeholder='Engine Size'
@@ -194,6 +201,7 @@ function Create() {
               <Form.Select
                 fluid
                 id='additionalDrivers'
+                required="required"
                 label='Additional Drivers'
                 options={additionalDriversOptions}
                 placeholder='Additional Drivers'
@@ -204,8 +212,8 @@ function Create() {
             <Grid.Column>
               <Form.Field fluid>
                 <label>What is the current value of the vehicle? ($)</label>
-                <input type="number" id="currentValue" name="currentValue" onChange={e => setCurrentValue(e.target.value)}
-                  min="00" max="50000" />
+                <input type="number" id="currentValue" required="required" name="currentValue" onChange={e => setCurrentValue(e.target.value)}
+                  min="5000" max="50000" />
               </Form.Field>
 
               <Form.Field>
