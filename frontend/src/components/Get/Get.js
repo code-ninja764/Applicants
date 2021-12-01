@@ -12,7 +12,7 @@ function Get() {
   const [tableData, setTableData] = useState([]);
   const [idForUpdate, setidForUpdate] = useState([]);
   const [tableData2, setTableData2] = useState([]);
-  
+  const [errorNoRecord, setErrorNoRecord] = useState(false);
 
 
 
@@ -31,10 +31,25 @@ function Get() {
     //const endpointURL = `https://6151d1824a5f22001701d45d.mockapi.io/api/v1/carInsurance/${idForUpdate}`;
     const endpointURL = `${SERVER_URL}/applicants/id?id=${idForUpdate}`;
     axios.get(endpointURL)
-      .then(response => setTableData2(response.data));
+      .then(response => handleResponseGet(response.data));
   };
 
   console.log(idForUpdate);
+
+  const handleResponseGet = (data) =>{
+    if(data && !Array.isArray(data))
+    {
+      setTableData2(data);
+      setErrorNoRecord(false);
+    }
+    else
+    {
+      document.getElementById("idForUpdate").value = '';
+      setErrorNoRecord(true);
+    }
+  }
+
+
 
   function setLocalStorage(data) {
     console.log(data.id);
@@ -55,6 +70,7 @@ function Get() {
         <label>ID</label>
         <input
           name="idForUpdate"
+          id = "idForUpdate"
           onChange={e => setidForUpdate(e.target.value)}
           placeholder='ID'
           value={idForUpdate} />
@@ -64,6 +80,8 @@ function Get() {
           onClick={callMockAPIToGetRecord}
         >Fetch</Form.Button>
       </Form>
+
+      {errorNoRecord && <p className='errors'>No record found with Driver ID {idForUpdate}</p>}
 
       <Table celled>
         <Table.Header>
