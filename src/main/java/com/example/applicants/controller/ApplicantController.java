@@ -37,7 +37,7 @@ public class ApplicantController {
     @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/applicants")
     void deleteSingleApplicant(@RequestParam Long id) {
-         service.deleteSingleApplicant(id);
+        service.deleteSingleApplicant(id);
     } //DELETE
 
     @CrossOrigin(origins = "http://localhost:3000")
