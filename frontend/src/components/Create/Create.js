@@ -158,15 +158,15 @@ function Create() {
                         <input placeholder='Address Line 1'
                                required="required"
                                onChange={e => setAddressLine1(e.target.value)}/> </Form.Field>
-                    <Form.Field> <label>Address Line 2</label>
+                    <Form.Field> <label>Address Line 2<sup>*</sup></label>
                         <input placeholder='Address Line 2'
                                required="required"
                                onChange={e => setAddressLine2(e.target.value)}/> </Form.Field>
-                    <Form.Field> <label>City</label>
+                    <Form.Field> <label>City<sup>*</sup></label>
                         <input placeholder='City'
                                required="required"
                                onChange={e => setCity(e.target.value)}/> </Form.Field>
-                    <Form.Field> <label>Zip Code</label>
+                    <Form.Field> <label>Zip Code<sup>*</sup></label>
                         <input placeholder='Zip Code'
                                required="required"
                                onChange={e => setZipCode(e.target.value)}/> </Form.Field>
@@ -210,14 +210,14 @@ function Create() {
                             </Grid.Column>
                             <Grid.Column>
                                 <Form.Field fluid>
-                                    <label>What is the current value of the vehicle? ($)</label>
+                                    <label>What is the current value of the vehicle? ($)<sup>*</sup></label>
                                     <input type="number" id="currentValue" required="required" name="currentValue"
                                            onChange={e => setCurrentValue(e.target.value)}
                                            min="5000" max="50000"/>
                                 </Form.Field>
 
                                 <Form.Field>
-                                    <label>Date vehicle was first registered</label>
+                                    <label>Date vehicle was first registered<sup>*</sup></label>
                                     <div className="col-8">
                                         <input id="dateRegistered" name="dateRegistered" type="date" required="required"
                                                className="form-control"
